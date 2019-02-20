@@ -42,7 +42,7 @@ chown -R $USER:$USER /var/www/trololo.com/public_html
 </html>
 ```
 
-- Créer le Host virtuel dans le dossier `/etc/apache2/sites-available/` en le copiant à partir du fichier par défaut : `cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/blablabla.com.conf`
+- Créer le Host virtuel 1 dans le dossier `/etc/apache2/sites-available/` en le copiant à partir du fichier par défaut : `cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/blablabla.com.conf`
 - Le modifier comme ci dessous : `nano /etc/apache2/sites-available/blablabla.com.conf`
 ```shell
 <VirtualHost *:80>
@@ -55,3 +55,20 @@ chown -R $USER:$USER /var/www/trololo.com/public_html
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+
+- Créer le Host virtuel 2 dans le dossier `/etc/apache2/sites-available/` en le copiant à partir du fichier par défaut : `cp /etc/apache2/sites-available/blablabla.com.conf /etc/apache2/sites-available/trololo.com.conf`
+- Le modifier comme ci dessous : `nano /etc/apache2/sites-available/trololo.com.conf`
+```shell
+<VirtualHost *:80>
+        ServerAdmin admin@trololo.com
+        ServerName trololo.com
+        ServerAlias www.trololo.com
+        DocumentRoot /var/www/trololo.com/public_html
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+
+- Activer les sites avec les commandes `a2ensite blablabla.com` et `a2ensite trololo.com` (`a2dissite` pour désactiver)
+- Redémarrer le service apache2 : `systemctl restart apache2`
