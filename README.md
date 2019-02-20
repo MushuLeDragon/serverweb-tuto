@@ -71,4 +71,9 @@ chown -R $USER:$USER /var/www/trololo.com/public_html
 ```
 
 - Activer les sites avec les commandes `a2ensite blablabla.com` et `a2ensite trololo.com` (`a2dissite` pour désactiver)
+- Ajouter les noms de domaine au Host dans le fichier `nano /etc/hosts`
+```shell
+127.0.0.1       www.blablabla.com
+127.0.0.1       www.trololo.com
+```
 - Redémarrer le service apache2 : `systemctl restart apache2`
