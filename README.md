@@ -37,7 +37,8 @@ chown -R $USER:$USER /var/www/trololo.com/public_html
   <head>
     <title>Welcome to Trololo.com!</title>
   </head>
-  <body> <h1>Success! The Trololo.com virtual host is working!</h1>
+  <body>
+    <h1>Success! The Trololo.com virtual host is working!</h1>
   </body>
 </html>
 ```
