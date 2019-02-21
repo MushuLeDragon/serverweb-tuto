@@ -6,11 +6,13 @@ How to setup a linux web server
 
 ### Debian / Ubuntu
 
-#### Installer et configurer Apache2
+### Installer et configurer Apache2
 
 - Installer **apache2** : `apt-get install apache2`
 
-#### Installer un ou plusieurs sites en local avec nom de domaine personnel
+### Installer un ou plusieurs sites en local avec nom de domaine personnel
+
+#### Créer l'architecture et les dossiers
 
 - Créer les dossiers qui hébergeront les sites et y mettre les droits utilisateur :
 ```shell
@@ -19,6 +21,8 @@ mkdir -p /var/www/trololo.com/public_html
 chown -R $USER:$USER /var/www/blablabla.com/public_html
 chown -R $USER:$USER /var/www/trololo.com/public_html
 ```
+
+#### Créer les pages web des Hosts
 
 - Créer les pages HTML de chacun des sites dans le dossier créé préalablement `nano /var/www/blablabla.com/public_html/index.html` et `nano /var/www/trololo.com/public_html/index.html` :
 ```html
@@ -42,6 +46,8 @@ chown -R $USER:$USER /var/www/trololo.com/public_html
   </body>
 </html>
 ```
+
+#### Créer les fichiers Host virtuels
 
 - Créer le Host virtuel 1 dans le dossier `/etc/apache2/sites-available/` en le copiant à partir du fichier par défaut : `cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/blablabla.com.conf`
 - Le modifier comme ci dessous : `nano /etc/apache2/sites-available/blablabla.com.conf`
@@ -71,7 +77,17 @@ chown -R $USER:$USER /var/www/trololo.com/public_html
 </VirtualHost>
 ```
 
+#### Activer les Hosts virtuels
+
 - Activer les sites avec les commandes `a2ensite blablabla.com` et `a2ensite trololo.com` (`a2dissite` pour désactiver)
+- (Optionnel) Désactiver le site par défaut `sudo a2dissite 000-default.conf`
+```shell
+#Output
+Enabling site blablabla.com.
+To activate the new configuration, you need to run:
+  service apache2 reload
+```
+
 - Ajouter les noms de domaine au Host dans le fichier `nano /etc/hosts`
 ```shell
 127.0.0.1       www.blablabla.com
