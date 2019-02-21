@@ -78,3 +78,11 @@ chown -R $USER:$USER /var/www/trololo.com/public_html
 127.0.0.1       www.trololo.com
 ```
 - Redémarrer le service apache2 : `systemctl restart apache2`
+- Pour contacter le site depuis le même réseau mais une machine différente il faudra configurer cette machine qui va effectuer la requête :
+  - Linux / Mac, dans le fichier `nano /etc/hosts` ajouter les lignes ci-dessous
+  - Windows, effectuer dans la console CMD `notepad %windir%\system32\drivers\etc\hosts` et ajouter les lignes ci-dessous
+ ```shell
+ # IP de la machine à contacter suivi du nom de domaine concerné
+192.168.0.126   blablabla.com
+192.168.0.126   trololo.com
+ ```
